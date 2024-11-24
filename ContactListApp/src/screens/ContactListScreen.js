@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-//add contacts!!!!!
+//🚩 add contacts!!!!!
 export default function ContactListScreen({navigation}) {
    /*const [contacts, setContacts] = useState([
         {id: '1', name: 'John Smith', phone: '02 9988 2211'},
