@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 //add contacts!!!!!
@@ -33,13 +33,13 @@ export default function ContactListScreen({navigation}) {
                 state: 'QLD',
                 zip: '1101',
                 country: 'Australia'
-            }
+            },
         },
     ];
 
     return (
         <View style = {styles.container}>
-            <FlatList>
+            <FlatList
                 data = {contacts}
                 keyExtractor = {(item) => item.id}
                 renderItem = {({item}) => (
@@ -50,7 +50,7 @@ export default function ContactListScreen({navigation}) {
                         </View>
                     </ToucheableOpacity>
                 )}
-            </FlatList>
+            />
 
             <TouchableOpacity style = {styles.addButton} onPress = {() => navigation.navigate('AddEditContact', {mode: 'add'})}>
                 <Text style = {styles.addButtonText}>Add</Text>
