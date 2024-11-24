@@ -1,12 +1,41 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text, TouchableOpacity, Stylesheet} from 'react-native';
+import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 //add contacts!!!!!
 export default function ContactListScreen({navigation}) {
-    const [contacts, setContacts] = useState([
+   /*const [contacts, setContacts] = useState([
         {id: '1', name: 'John Smith', phone: '02 9988 2211'},
         {id: '2', name: 'Sue White', phone: '03 8899 2255'},
-    ]);
+    ]);*/
+
+    const contacts = [
+        {
+            id: '1', 
+            name: 'John Smith', 
+            phone: '02 9988 2211',
+            department: 'Information Communications Technology',
+            address: {
+                street: '1 Code Lane',
+                city: 'Javaville',
+                state: 'NSW',
+                zip: '0100',
+                country: 'Australia'
+            }
+        },
+        {
+            id: '2', 
+            name: 'Sue White', 
+            phone: '03 8899 2255',
+            department: 'Finance',
+            address: {
+                street: '16 Bit Way',
+                city: 'Byte Cove',
+                state: 'QLD',
+                zip: '1101',
+                country: 'Australia'
+            }
+        },
+    ];
 
     return (
         <View style = {styles.container}>
@@ -30,23 +59,23 @@ export default function ContactListScreen({navigation}) {
     );
 }
 
-const styles = Stylesheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgrounColor: '#fff'
+        backgrounColor: '#fff',
     },
     contactCard: {
         padding: 16,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc'
+        borderBottomColor: '#ccc',
     },
     contactName: {
-        fontSize: 18
+        fontSize: 18,
     },
     contactPhone: {
         fontSize: 14, 
-        color: '#666'
+        color: '#666',
     },
     addButton: {
         backgrounColor: '#cb6d4f',
@@ -54,11 +83,11 @@ const styles = Stylesheet.create({
         position: 'absolute',
         bottom: 16,
         right: 16,
-        borderRadius: 50
+        borderRadius: 50,
     },
     addButtonText: {
         color: '#fff',
         fontSize: 18,
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+    },
 });
