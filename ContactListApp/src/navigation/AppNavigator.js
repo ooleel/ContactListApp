@@ -14,10 +14,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ContactList" component="{ContactListScreen}" options={{title:'Contacts'}} />
-        <Stack.Screen name="ContactDetails" component="{ContactDetailsScreen}" options={{title:'Contact Details'}} />
-        <Stack.Screen name="AddEditContact" component="{AddEditContactScreen}" options={{title:'Add/edit Contact Details'}} />
-        <Stack.Screen name="Accessibility" component="{AccessibilityScreen}" options={{title:'Accessibility'}} />
+        <Stack.Screen name="ContactList" component={ContactListScreen} options={{title:'Contacts'}} />
+        <Stack.Screen name="ContactDetails" component={ContactDetailsScreen} options={{title:'Contact Details'}} />
+        <Stack.Screen name="AddEditContact" component={AddEditContactScreen} options={{title:'Add/edit Contact Details'}} />
+        <Stack.Screen name="Accessibility" component={AccessibilityScreen} options={{title:'Accessibility'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

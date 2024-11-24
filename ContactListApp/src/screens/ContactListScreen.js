@@ -43,12 +43,12 @@ export default function ContactListScreen({navigation}) {
                 data = {contacts}
                 keyExtractor = {(item) => item.id}
                 renderItem = {({item}) => (
-                    <ToucheableOpacity onPress = {() => navigation.navigate('ContactDetails', {contact: item})}>
+                    <TouchableOpacity onPress = {() => navigation.navigate('ContactDetails', {contact: item})}>
                         <View style = {styles.contactCard}>
                             <Text style = {styles.contactName}>{item.name}</Text>
                             <Text style = {styles.contactPhone}>{item.phone}</Text>
                         </View>
-                    </ToucheableOpacity>
+                    </TouchableOpacity>
                 )}
             />
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgrounColor: '#fff',
+        backgroundColor: '#fff',
     },
     contactCard: {
         padding: 16,
@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
         color: '#666',
     },
     addButton: {
-        backgrounColor: '#cb6d4f',
+        backgroundColor: '#cb6d4f',
         padding: 16,
         position: 'absolute',
         bottom: 16,
         right: 16,
-        borderRadius: 50,
+        borderRadius: 17,
     },
     addButtonText: {
         color: '#fff',
