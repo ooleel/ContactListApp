@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStaticNavigator } from '@react-navigation/native';
-import ContactListScreen from './screens/ContactListScreen';
-import ContactDetailsScreen from './screens/ContactDetailsScreen'
+import { createStackNavigator } from '@react-navigation/native';
+import ContactListScreen from './src/screens/ContactListScreen';
+import ContactDetailsScreen from './src/screens/ContactDetailsScreen';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 

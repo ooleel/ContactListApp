@@ -2,6 +2,6 @@
 
 Contact repository app created with React Native.
 
----
-By Leeloo S.
---- 
+
+<small>By Leeloo S.</small>
+
