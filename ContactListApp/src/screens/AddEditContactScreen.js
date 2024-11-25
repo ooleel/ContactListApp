@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, StyleSheet} from 'react-native';
+import {View, TextInput, Button, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function AddEditContactScreen({route, navigation}) {
+    //add or edit mode
     const {mode, contact} = route.params || {};
+
+    //form fields states
     const [name, setName] = useState(contact?.name || ''); 
     const [phone, setPhone] = useState(contact?.phone || ''); 
     const [department, setDepartment] = useState(contact?.department || ''); 
@@ -14,12 +17,21 @@ export default function AddEditContactScreen({route, navigation}) {
     
     const handleSave = () => {
         //save logic for add or edit
+        if (mode === 'add') {
+            //new contact
+            console.log('Adding contact:', {name, phone, department, street, city, state, zip, country});
+        } else if (mode === 'edit') {
+            //update existing contact
+            console.log('Editing contact:', {name, phone, department, street, city, state, zip, country});
+        }
         navigation.goBack();
     };
 
     //🚩 ADD DROPDOWNS for departments and states
     return (
         <View styles = {styles.container}>
+            <Text style = {styles.title}>{mode === 'add' ? 'Add Contact' : 'Edit Contact'}</Text>
+
             <Text style = {styles.label}>Name:</Text>
             <TextInput style = {styles.input} placeholder="Name" value={name} onChangeText={setName}>{contact.name}</TextInput>
 
@@ -27,7 +39,7 @@ export default function AddEditContactScreen({route, navigation}) {
             <TextInput style = {styles.input} placeholder="Phone" value={phone} onChangeText={setPhone}>{contact.phone}</TextInput>
 
             <Text style = {styles.label}>Department:</Text>
-            <TextInput style = {styles.input} placeholder="Name" value={name} onChangeText={setName}>{contact.department}</TextInput>
+            <TextInput style = {styles.input} placeholder="Department" value={department} onChangeText={setDepartment}>{contact.department}</TextInput>
 
             <Text style = {styles.label}>Address:</Text>
             <TextInput style = {styles.input} placeholder="Street" value={street} onChangeText={setStreet}>{contact.address.department}</TextInput>
@@ -36,23 +48,42 @@ export default function AddEditContactScreen({route, navigation}) {
             <TextInput style = {styles.input} placeholder="ZIP" value={zip} onChangeText={setZip}>{contact.address.zip}</TextInput>
             <TextInput style = {styles.input} placeholder="Country" value={country} onChangeText={setCountry}>{contact.address.country}</TextInput>
 
-            <Button title="Save" onPress={handleSave}/>
+            <TouchableOpacity style = {styles.saveButton} onPress = {handleSave}>
+                <Text style = {styles.SaveButtonText}>Edit</Text>
+            </TouchableOpacity>
         </View>
     );
 }
 
-//🚩 Add styling labels + DROPDOWNS
+//🚩 Add styling DROPDOWNS
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
     }, 
-    //labels
+    label: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        marginTop: 8,
+    },
     input: {
         borderWidth: 1,
         borderColor: "#ccc",
         padding: 8,
         marginBottom: 16, 
         borderRadius: 4,
-    }
+    },
+    saveButton: {
+        backgroundColor: '#c64c38',
+        padding: 16,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        borderRadius: 17,
+    },
+    saveButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        textAlign: 'center',
+    },
 });

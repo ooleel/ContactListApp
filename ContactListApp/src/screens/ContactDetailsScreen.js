@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default function ContactDetailsScreen({route}) {
     const {contact} = route.params;
@@ -19,6 +19,10 @@ export default function ContactDetailsScreen({route}) {
             <Text style = {styles.value}>
                 {contact.address.street}, {contact.address.city}, {contact.address.state}, {contact.address.zip}, {contact.address.country},
             </Text>
+
+            <TouchableOpacity style = {styles.editButton} onPress = {() => navigation.navigate('AddEditContact', {mode: 'edit', contact: selectedContact})}>
+                <Text style = {styles.editButtonText}>Edit</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -30,12 +34,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     label: {
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: 'bold',
         marginTop: 8,
     },
     contactName: {
         fontSize: 16,
         marginBottom: 8,
+    },
+    editButton: {
+        backgroundColor: '#cb6d4f',
+        padding: 16,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        borderRadius: 17,
+    },
+    editButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        textAlign: 'center',
     },
 });
