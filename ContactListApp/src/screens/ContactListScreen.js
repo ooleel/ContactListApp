@@ -43,17 +43,17 @@ export default function ContactListScreen({navigation}) {
                 data = {contacts}
                 keyExtractor = {(item) => item.id}
                 renderItem = {({item}) => (
-                    <TouchableOpacity onPress = {() => navigation.navigate('ContactDetails', {contact: item})}>
-                        <View style = {styles.contactCard}>
-                            <Text style = {styles.contactName}>{item.name}</Text>
-                            <Text style = {styles.contactPhone}>{item.phone}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('ContactDetails', {contact: item})}>
+                        <View style={styles.contactCard}>
+                            <Text style={styles.contactName}>{item.name}</Text>
+                            <Text style={styles.contactPhone}>{item.phone}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
             />
 
-            <TouchableOpacity style = {styles.addButton} onPress = {() => navigation.navigate('AddEditContact', {mode: 'add'})}>
-                <Text style = {styles.addButtonText}>Add</Text>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'add'})}>
+                <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
         </View>
     );

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function AddEditContactScreen({route, navigation}) {
     //add or edit mode
@@ -29,27 +29,27 @@ export default function AddEditContactScreen({route, navigation}) {
 
     //🚩 ADD DROPDOWNS for departments and states
     return (
-        <View styles = {styles.container}>
-            <Text style = {styles.title}>{mode === 'add' ? 'Add Contact' : 'Edit Contact'}</Text>
+        <View styles={styles.container}>
+            <Text style={styles.title}>{mode === 'add' ? 'Add Contact' : 'Edit Contact'}</Text>
 
-            <Text style = {styles.label}>Name:</Text>
-            <TextInput style = {styles.input} placeholder="Name" value={name} onChangeText={setName}>{contact.name}</TextInput>
+            <Text style={styles.label}>Name:</Text>
+            <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName}>{contact.name}</TextInput>
 
-            <Text style = {styles.label}>Phone:</Text>
-            <TextInput style = {styles.input} placeholder="Phone" value={phone} onChangeText={setPhone}>{contact.phone}</TextInput>
+            <Text style={styles.label}>Phone:</Text>
+            <TextInput style={styles.input} placeholder="Phone" value={phone} onChangeText={setPhone}>{contact.phone}</TextInput>
 
-            <Text style = {styles.label}>Department:</Text>
-            <TextInput style = {styles.input} placeholder="Department" value={department} onChangeText={setDepartment}>{contact.department}</TextInput>
+            <Text style={styles.label}>Department:</Text>
+            <TextInput style={styles.input} placeholder="Department" value={department} onChangeText={setDepartment}>{contact.department}</TextInput>
 
-            <Text style = {styles.label}>Address:</Text>
-            <TextInput style = {styles.input} placeholder="Street" value={street} onChangeText={setStreet}>{contact.address.department}</TextInput>
-            <TextInput style = {styles.input} placeholder="City" value={city} onChangeText={setCity}>{contact.address.city}</TextInput>
-            <TextInput style = {styles.input} placeholder="State" value={state} onChangeText={setState}>{contact.address.state}</TextInput>
-            <TextInput style = {styles.input} placeholder="ZIP" value={zip} onChangeText={setZip}>{contact.address.zip}</TextInput>
-            <TextInput style = {styles.input} placeholder="Country" value={country} onChangeText={setCountry}>{contact.address.country}</TextInput>
+            <Text style={styles.label}>Address:</Text>
+            <TextInput style={styles.input} placeholder="Street" value={street} onChangeText={setStreet}>{contact.address.department}</TextInput>
+            <TextInput style={styles.input} placeholder="City" value={city} onChangeText={setCity}>{contact.address.city}</TextInput>
+            <TextInput style={styles.input} placeholder="State" value={state} onChangeText={setState}>{contact.address.state}</TextInput>
+            <TextInput style={styles.input} placeholder="ZIP" value={zip} onChangeText={setZip}>{contact.address.zip}</TextInput>
+            <TextInput style={styles.input} placeholder="Country" value={country} onChangeText={setCountry}>{contact.address.country}</TextInput>
 
-            <TouchableOpacity style = {styles.saveButton} onPress = {handleSave}>
-                <Text style = {styles.SaveButtonText}>Edit</Text>
+            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                <Text style={styles.SaveButtonText}>Save</Text>
             </TouchableOpacity>
         </View>
     );
@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
     }, 
+    title: {
+        color: '#941a1d',
+        fontSize: 30,
+        textAlign: 'center',
+    },
     label: {
         fontSize: 12,
         fontWeight: 'bold',

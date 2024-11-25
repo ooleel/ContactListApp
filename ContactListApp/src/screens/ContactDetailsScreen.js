@@ -1,27 +1,27 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-export default function ContactDetailsScreen({route}) {
+export default function ContactDetailsScreen({route, navigation}) {
     const {contact} = route.params;
 
     return (
-        <View style = {styles.container}>
-            <Text style = {styles.label}>Name:</Text>
-            <Text style = {styles.value}>{contact.name}</Text>
+        <View style={styles.container}>
+            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.value}>{contact.name}</Text>
 
-            <Text style = {styles.label}>Phone:</Text>
-            <Text style = {styles.value}>{contact.phone}</Text>
+            <Text style={styles.label}>Phone:</Text>
+            <Text style={styles.value}>{contact.phone}</Text>
 
-            <Text style = {styles.label}>Department:</Text>
-            <Text style = {styles.value}>{contact.department}</Text>
+            <Text style={styles.label}>Department:</Text>
+            <Text style={styles.value}>{contact.department}</Text>
 
-            <Text style = {styles.label}>Address:</Text>
-            <Text style = {styles.value}>
+            <Text style={styles.label}>Address:</Text>
+            <Text style={styles.value}>
                 {contact.address.street}, {contact.address.city}, {contact.address.state}, {contact.address.zip}, {contact.address.country},
             </Text>
 
-            <TouchableOpacity style = {styles.editButton} onPress = {() => navigation.navigate('AddEditContact', {mode: 'edit', contact: selectedContact})}>
-                <Text style = {styles.editButtonText}>Edit</Text>
+            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'edit', contact: selectedContact})}>
+                <Text style={styles.editButtonText}>Edit</Text>
             </TouchableOpacity>
         </View>
     );
