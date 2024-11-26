@@ -38,7 +38,7 @@ export default function AddEditContactScreen(props) {
 
     //🚩 ADD DROPDOWNS for departments and states
     return (
-        <View styles={styles.container}>
+        <View style={styles.container}>
             <Text style={styles.title}>{mode === 'add' ? 'Add Contact' 
             : 'Edit Contact'}</Text>
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
     saveButton: {
-        backgroundColor: '#c64c38',
+        backgroundColor: '#941a1d',
         padding: 16,
         position: 'absolute',
         bottom: 16,

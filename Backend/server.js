@@ -13,26 +13,22 @@ let contacts = [
             name: 'John Smith', 
             phone: '02 9988 2211',
             department: 'Information Communications Technology',
-            address: {
-                street: '1 Code Lane',
-                city: 'Javaville',
-                state: 'NSW',
-                zip: '0100',
-                country: 'Australia'
-            }
+            street: '1 Code Lane',
+            city: 'Javaville',
+            state: 'NSW',
+            zip: '0100',
+            country: 'Australia'
         },
         {
             id: '2', 
             name: 'Sue White', 
             phone: '03 8899 2255',
             department: 'Finance',
-            address: {
-                street: '16 Bit Way',
-                city: 'Byte Cove',
-                state: 'QLD',
-                zip: '1101',
-                country: 'Australia'
-            },
+            street: '16 Bit Way',
+            city: 'Byte Cove',
+            state: 'QLD',
+            zip: '1101',
+            country: 'Australia'
         },
     ];
 
@@ -50,7 +46,7 @@ app.post('/contacts', (req, res) => {
 app.post('/contacts/:id', (req, res) => { 
     const {id} = req.params;
     const {name, phone} = req.body;
-    const contact = contacts.find((c) => c.id === parseInt(id));
+    const contact = contacts.find((c) => c.id === id);
 
     if (!contact) {
         return res.status(404).json({error: 'Contact not found'});

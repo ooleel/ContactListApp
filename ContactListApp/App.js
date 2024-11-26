@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //Screens
-import ContactListScreen from '../ContactListApp/src/screens/ContactListScreen';
-import ContactDetailsScreen from '../ContactListApp/src/screens/ContactDetailsScreen';
-import AddEditContactScreen from '../ContactListApp/src/screens/AddEditContactScreen';
-import AccessibilityScreen from '../ContactListApp/src/screens/AccessibilityScreen';
+import ContactListScreen from './src/screens/ContactListScreen';
+import ContactDetailsScreen from './src/screens/ContactDetailsScreen';
+import AddEditContactScreen from './src/screens/AddEditContactScreen';
+import AccessibilityScreen from './src/screens/AccessibilityScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ export default function App() {
         <Stack.Screen name="ContactList" component={ContactListScreen} options={{title: 'Contacts'}} />
         <Stack.Screen name="ContactDetails" component={ContactDetailsScreen} options={{title: 'Contact Details'}} />
         <Stack.Screen name="AddEditContact" component={AddEditContactScreen} options={{title: 'Add/Edit Contact' }} />
-        <Stack.Screen name="Accessibility" component={AccessibilityScreen} options={{title: 'Accessibility'}} />
+        <Stack.Screen name="Accessibility" component={AccessibilityScreen} options={{title: 'Settings'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
