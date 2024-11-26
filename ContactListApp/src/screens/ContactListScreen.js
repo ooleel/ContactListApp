@@ -1,47 +1,33 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-//🚩 add contacts!!!!!
 export default function ContactListScreen({navigation}) {
-   /*const [contacts, setContacts] = useState([
-        {id: '1', name: 'John Smith', phone: '02 9988 2211'},
-        {id: '2', name: 'Sue White', phone: '03 8899 2255'},
-    ]);*/
+    const [contacts, setContacts] = useState([]);
 
-    const contacts = [
-        {
-            id: '1', 
-            name: 'John Smith', 
-            phone: '02 9988 2211',
-            department: 'Information Communications Technology',
-            address: {
-                street: '1 Code Lane',
-                city: 'Javaville',
-                state: 'NSW',
-                zip: '0100',
-                country: 'Australia'
+    useEffect(() => {
+        const fetchContacts = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/contacts'); //Android emulator
+                const data = await response.json();
+                console.log('Fetched contacts:', data);
+                setContacts(data) //store fetched contacts in state
+            } catch (error) {
+                console.error('Error fetching contacts:', error); //log errors for debugging
             }
-        },
-        {
-            id: '2', 
-            name: 'Sue White', 
-            phone: '03 8899 2255',
-            department: 'Finance',
-            address: {
-                street: '16 Bit Way',
-                city: 'Byte Cove',
-                state: 'QLD',
-                zip: '1101',
-                country: 'Australia'
-            },
-        },
-    ];
+        };
+
+        fetchContacts();
+    }, []);
+
 
     return (
         <View style = {styles.container}>
+            {contacts.length === 0 ? (
+            <Text style={styles.emptyMessage}>No contacts available</Text>
+            ):(
             <FlatList
                 data = {contacts}
-                keyExtractor = {(item) => item.id}
+                keyExtractor = {(item) => item.id.toString()}
                 renderItem = {({item}) => (
                     <TouchableOpacity onPress={() => navigation.navigate('ContactDetails', {contact: item})}>
                         <View style={styles.contactCard}>
@@ -51,8 +37,9 @@ export default function ContactListScreen({navigation}) {
                     </TouchableOpacity>
                 )}
             />
+            )};
 
-            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'add'})}>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('ParentNavigator', { screen: 'AddEditContact', params: { mode: 'add' } })}>
                 <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
         </View>
@@ -89,5 +76,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         textAlign: 'center',
+    },
+    emptyMessage: {
+        textAlign: 'center',
+        fontSize: 16,
+        marginTop: 20,
+        color: '#888',
     },
 });

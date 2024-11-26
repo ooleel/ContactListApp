@@ -10,7 +10,7 @@ export default function AccessibilityScreen({route, navigation}) {
     };
 
     return (
-        <View styles = {styles.container}>
+        <View style={styles.container}>
             <Slider minimumValue={0.1} maximumValue={1} value={brightness} onValueChange={setBrightness}/>
             <Slider minimumValue={10} maximumValue={24} value={fontSize} onValueChange={setFontSize}/>
             <Switch value={false}/>

@@ -18,3 +18,10 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+/*  */
+    
+    //debug
+    // <View style={styles.container}>
+    //   <Text style={styles.text}>Hello, Contact List App is working!</Text>
+    // </View>

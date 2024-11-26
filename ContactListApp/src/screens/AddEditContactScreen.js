@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export default function AddEditContactScreen({route, navigation}) {
     //add or edit mode
-    const {mode, contact} = route.params || {};
+    const {mode, contact = {}} = route.params || {}; //default value for contact if not provided
 
-    //form fields states
+    //form fields states using default values or empty strings
     const [name, setName] = useState(contact?.name || ''); 
     const [phone, setPhone] = useState(contact?.phone || ''); 
     const [department, setDepartment] = useState(contact?.department || ''); 
@@ -24,7 +24,7 @@ export default function AddEditContactScreen({route, navigation}) {
             //update existing contact
             console.log('Editing contact:', {name, phone, department, street, city, state, zip, country});
         }
-        navigation.goBack();
+        navigation.goBack(); //navigate back after saving
     };
 
     //🚩 ADD DROPDOWNS for departments and states

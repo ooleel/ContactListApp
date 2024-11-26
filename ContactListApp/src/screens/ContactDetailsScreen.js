@@ -20,7 +20,7 @@ export default function ContactDetailsScreen({route, navigation}) {
                 {contact.address.street}, {contact.address.city}, {contact.address.state}, {contact.address.zip}, {contact.address.country},
             </Text>
 
-            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'edit', contact: selectedContact})}>
+            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'edit', contact})}>
                 <Text style={styles.editButtonText}>Edit</Text>
             </TouchableOpacity>
         </View>

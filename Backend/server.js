@@ -1,14 +1,12 @@
 const express = require('express');
 const cors = require('cors'); //communication between React Native and backend
-const bodyParser = require('body-parser'); //parses incoming request bodies in JSON format
-
-const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
 
 //data 
+//🚩 add contacts!!!!!
 let contacts = [
         {
             id: '1', 
@@ -49,13 +47,20 @@ app.post('/contacts', (req, res) => {
     res.status(201).json(newContact);
 });
 
-app.put('/contacts/:id', (req, res) => { //only post!!
+app.post('/contacts/:id', (req, res) => { 
     const {id} = req.params;
     const {name, phone} = req.body;
-    const contact = contacts.find//HERE!!!!!!!!
-})
+    const contact = contacts.find((c) => c.id === parseInt(id));
 
-app.listen(3000, function() {
-    console.log("Server is now running");
+    if (!contact) {
+        return res.status(404).json({error: 'Contact not found'});
+    }
 
+    contact.name = name;
+    contact.phone = phone;
+    res.json(contact);
+});
+
+app.listen(PORT, function() {
+    console.log(`Server is now running at http://localhost:${PORT}`);
 });
