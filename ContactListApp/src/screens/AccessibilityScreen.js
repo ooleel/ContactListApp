@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Slider, Switch, StyleSheet, TouchableOpacity} from 'react-native';
+import Slider from '@react-native-community/slider';
+import {View, Switch, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function AccessibilityScreen({route, navigation}) {
     const [brightness, setBrightness] = useState(1);

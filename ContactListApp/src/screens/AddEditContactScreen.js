@@ -1,28 +1,37 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useState} from 'react';
 import {View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export default function AddEditContactScreen({route, navigation}) {
+export default function AddEditContactScreen(props) {
     //add or edit mode
-    const {mode, contact = {}} = route.params || {}; //default value for contact if not provided
+    //debugger;
+    let mode = '';
+    let contact = {};
+    if(props) {
+        mode = props.route.params.editMode;
+        contact = props.route.params.contact;
+    }
 
     //form fields states using default values or empty strings
-    const [name, setName] = useState(contact?.name || ''); 
-    const [phone, setPhone] = useState(contact?.phone || ''); 
-    const [department, setDepartment] = useState(contact?.department || ''); 
-    const [street, setStreet] = useState(contact?.address.street || ''); 
-    const [city, setCity] = useState(contact?.address.city || ''); 
-    const [state, setState] = useState(contact?.address.state || ''); 
-    const [zip, setZip] = useState(contact?.address.zip || ''); 
-    const [country, setCountry] = useState(contact?.address.country || '');
+    const [staff, setStaff] = useState({
+         name: contact.name,
+         phone: contact.phone,
+         department: contact.department,
+         street: contact.street,
+         city: contact.city,
+         state: contact.state,
+         zip: contact.zip,
+         country: contact.country
+    });
     
     const handleSave = () => {
         //save logic for add or edit
         if (mode === 'add') {
             //new contact
-            console.log('Adding contact:', {name, phone, department, street, city, state, zip, country});
+            console.log('Adding contact:', staff);
         } else if (mode === 'edit') {
             //update existing contact
-            console.log('Editing contact:', {name, phone, department, street, city, state, zip, country});
+            console.log('Editing contact:', staff);
         }
         navigation.goBack(); //navigate back after saving
     };
@@ -30,23 +39,24 @@ export default function AddEditContactScreen({route, navigation}) {
     //🚩 ADD DROPDOWNS for departments and states
     return (
         <View styles={styles.container}>
-            <Text style={styles.title}>{mode === 'add' ? 'Add Contact' : 'Edit Contact'}</Text>
+            <Text style={styles.title}>{mode === 'add' ? 'Add Contact' 
+            : 'Edit Contact'}</Text>
 
             <Text style={styles.label}>Name:</Text>
-            <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName}>{contact.name}</TextInput>
+            <TextInput style={styles.input} placeholder="Name" value={staff.name} />
 
             <Text style={styles.label}>Phone:</Text>
-            <TextInput style={styles.input} placeholder="Phone" value={phone} onChangeText={setPhone}>{contact.phone}</TextInput>
+            <TextInput style={styles.input} placeholder="Phone" value={staff.phone} />
 
             <Text style={styles.label}>Department:</Text>
-            <TextInput style={styles.input} placeholder="Department" value={department} onChangeText={setDepartment}>{contact.department}</TextInput>
+            <TextInput style={styles.input} placeholder="Department" value={staff.department} />
 
             <Text style={styles.label}>Address:</Text>
-            <TextInput style={styles.input} placeholder="Street" value={street} onChangeText={setStreet}>{contact.address.department}</TextInput>
-            <TextInput style={styles.input} placeholder="City" value={city} onChangeText={setCity}>{contact.address.city}</TextInput>
-            <TextInput style={styles.input} placeholder="State" value={state} onChangeText={setState}>{contact.address.state}</TextInput>
-            <TextInput style={styles.input} placeholder="ZIP" value={zip} onChangeText={setZip}>{contact.address.zip}</TextInput>
-            <TextInput style={styles.input} placeholder="Country" value={country} onChangeText={setCountry}>{contact.address.country}</TextInput>
+            <TextInput style={styles.input} placeholder="Street" value={staff.street} /> 
+            <TextInput style={styles.input} placeholder="City" value={staff.city} /> 
+            <TextInput style={styles.input} placeholder="State" value={staff.state} /> 
+            <TextInput style={styles.input} placeholder="ZIP" value={staff.zip} /> 
+            <TextInput style={styles.input} placeholder="Country" value={staff.country} /> 
 
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
                 <Text style={styles.SaveButtonText}>Save</Text>

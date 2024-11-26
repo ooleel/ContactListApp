@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors'); //communication between React Native and backend
 const PORT = 3000;
-
+const app = express();
 app.use(cors());
 app.use(express.json());
 

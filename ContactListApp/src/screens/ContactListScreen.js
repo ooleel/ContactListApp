@@ -1,13 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default function ContactListScreen({navigation}) {
     const [contacts, setContacts] = useState([]);
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Accessibility')}
+                    style={styles.headerButton}
+                >
+                    <Text style={styles.headerButtonText}>Settings</Text>
+                </TouchableOpacity>
+            )
+        })
+    }, [navigation])
+
     useEffect(() => {
         const fetchContacts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/contacts'); //Android emulator
+                const response = await fetch('http://localhost:3000/contacts'); 
                 const data = await response.json();
                 console.log('Fetched contacts:', data);
                 setContacts(data) //store fetched contacts in state
@@ -21,7 +34,7 @@ export default function ContactListScreen({navigation}) {
 
 
     return (
-        <View style = {styles.container}>
+        <View style={styles.container}>
             {contacts.length === 0 ? (
             <Text style={styles.emptyMessage}>No contacts available</Text>
             ):(
@@ -83,4 +96,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
         color: '#888',
     },
+    headerButton: {
+        marginRight: 16,
+    },
+    headerButtonText: {
+        fontSize: 16,
+        color: '#cb6d4f',
+    }
 });

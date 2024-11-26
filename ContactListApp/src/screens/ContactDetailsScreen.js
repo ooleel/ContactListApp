@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default function ContactDetailsScreen({route, navigation}) {
     const {contact} = route.params;
+    console.log(navigation);
 
     return (
         <View style={styles.container}>
@@ -20,7 +21,7 @@ export default function ContactDetailsScreen({route, navigation}) {
                 {contact.address.street}, {contact.address.city}, {contact.address.state}, {contact.address.zip}, {contact.address.country},
             </Text>
 
-            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {mode: 'edit', contact})}>
+            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {editMode: 'edit', contact})}>
                 <Text style={styles.editButtonText}>Edit</Text>
             </TouchableOpacity>
         </View>
