@@ -18,10 +18,12 @@ export default function ContactDetailsScreen({route, navigation}) {
 
             <Text style={styles.label}>Address:</Text>
             <Text style={styles.value}>
-                {contact.street}, {contact.city}, {contact.state}, {contact.zip}, {contact.country},
+                {[contact.street, contact.city, contact.state, contact.zip, contact.country]
+                .filter(Boolean) //removes empty/null/undefined values
+                .join(', ')}
             </Text>
 
-            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('AddEditContact', {editMode: 'edit', contact})}>
+            <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('EditContact', {contact})}>
                 <Text style={styles.editButtonText}>Edit</Text>
             </TouchableOpacity>
         </View>

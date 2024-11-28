@@ -32,7 +32,6 @@ export default function ContactListScreen({navigation}) {
         fetchContacts();
     }, []);
 
-
     return (
         <View style={styles.container}>
             {contacts.length === 0 ? (
@@ -52,7 +51,7 @@ export default function ContactListScreen({navigation}) {
             />
             )};
 
-            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddEditContact', { mode: 'add' })}>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddContact')}>
                 <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
         </View>
