@@ -3,14 +3,15 @@ import {useState} from 'react';
 import {View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export default function AddEditContactScreen(props) {
+    const navigation = props.navigation
     //add or edit mode
     //debugger;
     let mode = '';
-    let contact = {};
     if(props) {
         mode = props.route.params.editMode;
-        contact = props.route.params.contact;
+        //contact = props.route.params.contact;
     }
+    let contact = props.route.params.contact || {};
 
     //form fields states using default values or empty strings
     const [staff, setStaff] = useState({
