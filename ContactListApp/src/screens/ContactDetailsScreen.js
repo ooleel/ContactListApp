@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
     },
     contactName: {
-        fontSize: 16,
+        fontSize: 18,
         marginBottom: 8,
     },
     editButton: {

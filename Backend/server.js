@@ -74,7 +74,7 @@ app.post('/contacts/:id', (req, res) => {
 
     //validate required fields
     if (!name || !phone) {
-        return res.status(400).json({ error: 'Name and phone are required.'});
+        return res.status(400).json({error: 'Name and phone are required.'});
     }
 
     const contactIndex = contacts.findIndex((c) => c.id === parseInt(id, 10));
