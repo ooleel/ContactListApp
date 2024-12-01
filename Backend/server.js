@@ -44,13 +44,17 @@ app.get('/contacts', (req, res) => {
 app.post('/contacts', (req, res) => {
     const { name, phone, department, street, city, state, zip, country} = req.body;
 
+    console.log('Request Body:', req.body); //debugging: load incoming data
+
     //validate required fields
     if (!name || !phone) {
+        console.error('Validation failed: Missing name or phone.'); //debugging
+        //alert?
         return res.status(400).json({ error: 'Name and phone are required.'});
     }
 
     const newContact = {
-        id: contact.length > 0 ? contact[contacts.length - 1].id + 1 : 1, //new id
+        id: (contacts.length > 0 ? parseInt(contacts[contacts.length - 1].id, 10) + 1 : 1).ToString, //new id
         name, 
         phone, 
         department: department || '', //default to empty if not provided
@@ -64,6 +68,7 @@ app.post('/contacts', (req, res) => {
     };
 
     contacts.push(newContact);
+    console.log('New Contact Added:', newContact); //debugging: log new data
     res.status(201).json(newContact);
 });
 

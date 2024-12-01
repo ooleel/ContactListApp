@@ -12,13 +12,15 @@ export default function AddContactScreen({navigation}) {
     const [country, setCountry] = useState('');
 
     const handleAddContact = async() => {
+        const payload = {name, phone, department, street, city, state, zip, country,};
+
+        console.log('Sending Payload:', payload); //debugging: log payload
+
         try {
             const response = await fetch('http://localhost:3000/contacts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    name, phone, department, street, city, state, zip, country,
-                }),
+                body: JSON.stringify({payload}),
             });
 
             if (response.ok) {

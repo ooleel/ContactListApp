@@ -6,11 +6,11 @@ export default function EditContactScreen({route, navigation}) {
     const [name, setName] = useState(contact.name);
     const [phone, setPhone] = useState(contact.phone);
     const [department, setDepartment] = useState(contact.department || '');
-    const [street, setStreet] = useState(contact.address?.street || '');
-    const [city, setCity] = useState(contact.address?.city || '');
-    const [state, setState] = useState(contact.address?.state || '');
-    const [zip, setZip] = useState(contact.address?.zip || '');
-    const [country, setCountry] = useState(contact.address?.country || '');
+    const [street, setStreet] = useState(contact.street || '');
+    const [city, setCity] = useState(contact.city || '');
+    const [state, setState] = useState(contact.state || '');
+    const [zip, setZip] = useState(contact.zip || '');
+    const [country, setCountry] = useState(contact.country || '');
 
     const handleEditContact = async() => {
         try {

@@ -40,8 +40,9 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         marginTop: 8,
+        color: "#666",
     },
-    contactName: {
+    value: {
         fontSize: 18,
         marginBottom: 8,
     },
