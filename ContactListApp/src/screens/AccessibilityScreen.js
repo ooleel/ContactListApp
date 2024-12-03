@@ -6,9 +6,10 @@ import {View, Switch, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import * as Brightness from 'expo-brightness'; //done: npx expo install expo-brightness
 import {Audio} from 'expo-av'; //done: npx expo install expo-av
 
-export default function AccessibilityScreen({fontSize, setFontSize,accessibilitySettings, setAccessibilitySettings, navigation}) {
+export default function AccessibilityScreen({fontSize, setFontSize, accessibilitySettings, setAccessibilitySettings, navigation}) {
     const [sound, setSound] = useState();
 
+    //brightness
     const handleBrightnessChange = async (value) => {
         try {
             const updatedSettings = {...accessibilitySettings, brightness: value};
@@ -17,8 +18,9 @@ export default function AccessibilityScreen({fontSize, setFontSize,accessibility
         } catch (error) {
             console.error('Error setting brightness:', error);
         }
-    };
+    }; 
 
+    //sound
     const handleSoundToggle = async (value) => {
         try {
             const updatedSettings = {...accessibilitySettings, isSoundEnabled: value};
@@ -29,7 +31,7 @@ export default function AccessibilityScreen({fontSize, setFontSize,accessibility
                 await sound.unloadAsync(); //cleanup
             }
         } catch (error) {
-            console.error('Error playing sound:', error);
+            console.error('Error toggling sound:', error);
         }
     };
     
@@ -53,7 +55,7 @@ export default function AccessibilityScreen({fontSize, setFontSize,accessibility
                 <Text style={styles.label}>Font size</Text>
                 <Slider 
                     minimumValue={10} 
-                    maximumValue={24} 
+                    maximumValue={40} 
                     value={fontSize} 
                     onSlidingComplete={setFontSize}
                 />
@@ -83,7 +85,6 @@ const styles = StyleSheet.create({
         padding: 16,
     }, 
     settingsContainer: {
-        //flex: 1,
         padding: 10,
     },
     label: {

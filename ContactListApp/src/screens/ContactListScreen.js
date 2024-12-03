@@ -2,7 +2,7 @@ import React, {useState, useLayoutEffect} from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet, useWindowDimensions} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 
-export default function ContactListScreen({navigation}) {
+export default function ContactListScreen({accessibilityStyle, navigation}) {
     const [contacts, setContacts] = useState([]);
     const {width, height} = useWindowDimensions();
     const isLandscape = width > height;
@@ -31,7 +31,7 @@ export default function ContactListScreen({navigation}) {
             } catch (error) {
                 console.error('Error fetching contacts:', error); //log errors for debugging
             }
-        };
+        }
 
         fetchContacts();
         }, [])
@@ -51,12 +51,12 @@ export default function ContactListScreen({navigation}) {
                         onPress={() => navigation.navigate('ContactDetails', {contact: item})}
                         style={[styles.contactCard, isLandscape && styles.landscapeCard]}
                     >
-                        <Text style={styles.contactName}>{item.name}</Text>
-                        <Text style={styles.contactPhone}>{item.phone}</Text>
+                        <Text style={[styles.contactName, accessibilityStyle]}>{item.name}</Text>
+                        <Text style={[styles.contactPhone, accessibilityStyle]}>{item.phone}</Text>
                     </TouchableOpacity>
                 )}
             />
-            )};
+            )}
 
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddContact')}>
                 <Text style={styles.addButtonText}>Add</Text>
@@ -85,10 +85,9 @@ const styles = StyleSheet.create({
         marginHorizontal: '1%',
     },
     contactName: {
-        fontSize: 18,
+        //fontSize
     },
     contactPhone: {
-        fontSize: 14, 
         color: '#666',
     },
     addButton: {

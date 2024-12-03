@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, useWindowDimensions} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
-export default function ContactDetailsScreen({route, navigation}) {
+export default function ContactDetailsScreen({route, accessibilityStyle, navigation}) {
     const {contact} = route.params;
     console.log(navigation);
     const {width, height} = useWindowDimensions();
@@ -19,7 +19,7 @@ export default function ContactDetailsScreen({route, navigation}) {
                         console.log('Fetched updated contact:', updatedContact);
                         setContacts(updatedContact) //update fetched contact in state
                     } else {
-                        console.error('Failed to ftech contact:', response.status)
+                        console.error('Failed to fetch contact:', response.status)
                     }
                 } catch (error) {
                     console.error('Error fetching contact:', error); //log errors for debugging
@@ -31,17 +31,17 @@ export default function ContactDetailsScreen({route, navigation}) {
 
     return (
         <View style={[styles.container, isLandscape && styles.landscapeContainer]}>
-            <Text style={styles.label}>Name:</Text>
-            <Text style={styles.value}>{contact.name}</Text>
+            <Text style={[styles.label, accessibilityStyle]}>Name:</Text>
+            <Text style={[styles.value, accessibilityStyle]}>{contact.name}</Text>
 
-            <Text style={styles.label}>Phone:</Text>
-            <Text style={styles.value}>{contact.phone}</Text>
+            <Text style={[styles.label, accessibilityStyle]}>Phone:</Text>
+            <Text style={[styles.value, accessibilityStyle]}>{contact.phone}</Text>
 
-            <Text style={styles.label}>Department:</Text>
-            <Text style={styles.value}>{contact.department}</Text>
+            <Text style={[styles.label, accessibilityStyle]}>Department:</Text>
+            <Text style={[styles.value, accessibilityStyle]}>{contact.department}</Text>
 
-            <Text style={styles.label}>Address:</Text>
-            <Text style={styles.value}>
+            <Text style={[styles.label, accessibilityStyle]}>Address:</Text>
+            <Text style={[styles.value, accessibilityStyle]}>
                 {[contact.street, contact.city, contact.state, contact.zip, contact.country]
                 .filter(Boolean) //removes empty/null/undefined values
                 .join(', ')}
@@ -65,13 +65,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
     },
     label: {
-        fontSize: 12,
-        fontWeight: 'bold',
         marginTop: 8,
         color: "#666",
     },
     value: {
-        fontSize: 18,
         marginBottom: 8,
     },
     editButton: {

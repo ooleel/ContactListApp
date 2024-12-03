@@ -19,6 +19,9 @@ export default function App() {
     isSoundEnabled: false,
   });
 
+  //shared styles for accessibility
+  const accessibilityStyle = {fontSize};
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -26,10 +29,8 @@ export default function App() {
           {(props) => (
             <ContactListScreen
               {...props}
-              fontSize={fontSize}
-              setFontSize={setFontSize}
               accessibilitySettings={accessibilitySettings}
-              setAccessibilitySettings={setAccessibilitySettings}
+              accessibilityStyle={accessibilityStyle}
             />
           )}
         </Stack.Screen>
@@ -38,10 +39,8 @@ export default function App() {
           {(props) => (
             <ContactDetailsScreen
               {...props}
-              fontSize={fontSize}
-              setFontSize={setFontSize}
               accessibilitySettings={accessibilitySettings}
-              setAccessibilitySettings={setAccessibilitySettings}
+              accessibilityStyle={accessibilityStyle}
             />
           )}
         </Stack.Screen>
