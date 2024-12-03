@@ -42,7 +42,8 @@ app.get('/contacts', (req, res) => {
 
 //add new contact
 app.post('/contacts', (req, res) => {
-    const { name, phone, department, street, city, state, zip, country} = req.body;
+    const data = req.body.payload || req.body; //wrapped payload
+    const { name, phone, department, street, city, state, zip, country} = data;
 
     console.log('Request Body:', req.body); //debugging: load incoming data
 
@@ -58,13 +59,11 @@ app.post('/contacts', (req, res) => {
         name, 
         phone, 
         department: department || '', //default to empty if not provided
-        address: {
-            street: street || '',
-            city: city || '',
-            state: state || '',
-            zip: zip || '',
-            country: country || '',
-        },
+        street: street || '',
+        city: city || '',
+        state: state || '',
+        zip: zip || '',
+        country: country || '',
     };
 
     contacts.push(newContact);
@@ -75,14 +74,15 @@ app.post('/contacts', (req, res) => {
 //edit existing contact
 app.post('/contacts/:id', (req, res) => { 
     const {id} = req.params;
-    const { name, phone, department, street, city, state, zip, country} = req.body;
+    const data = req.body.payload || req.body; //wrapped payload
+    const { name, phone, department, street, city, state, zip, country} = data;
 
     //validate required fields
     if (!name || !phone) {
         return res.status(400).json({error: 'Name and phone are required.'});
     }
 
-    const contactIndex = contacts.findIndex((c) => c.id === parseInt(id, 10));
+    const contactIndex = contacts.findIndex((c) => c.id === id);
 
     if (contactIndex === -1) {
         return res.status(404).json({error: 'Contact not found'});
@@ -94,13 +94,11 @@ app.post('/contacts/:id', (req, res) => {
         name, 
         phone, 
         department, 
-        address: {
-            street,
-            city,
-            state,
-            zip,
-            country,
-        },
+        street,
+        city,
+        state,
+        zip,
+        country,
     }
 
     res.json(contacts[contactIndex]);

@@ -20,7 +20,7 @@ export default function AddContactScreen({navigation}) {
             const response = await fetch('http://localhost:3000/contacts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({payload}),
+                body: JSON.stringify(payload),
             });
 
             if (response.ok) {

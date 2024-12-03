@@ -76,16 +76,27 @@ export default function AccessibilityScreen({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Brightness</Text>
-            <Slider minimumValue={0.1} maximumValue={1} value={brightness} onSlidingComplete={handleBrightnessChange}/>
-
-            <Text style={styles.label}>Font size</Text>
-            <Slider minimumValue={10} maximumValue={24} value={fontSize} onSlidingComplete={setFontSize}/>
-            <Text style={{fontSize: fontSize}}>Preview font size...</Text>
-
-            <Text style={styles.label}>Sound effects</Text>
-            <Switch value={isSoundEnabled} onValueChange={handleSoundToggle}/>
-
+            <View style={styles.settingsContainer}>
+                <Text style={styles.label}>Brightness</Text>
+                <Slider minimumValue={0.1} maximumValue={1} value={brightness} onSlidingComplete={handleBrightnessChange}/>
+            </View>
+            
+            <View style={styles.settingsContainer}>
+                <Text style={styles.label}>Font size</Text>
+                <Slider minimumValue={10} maximumValue={24} value={fontSize} onSlidingComplete={setFontSize}/>
+                <Text style={{fontSize: fontSize}}>Preview font size...</Text>
+            </View>
+            
+            <View style={styles.settingsContainer}>
+                <Text style={styles.label}>Sound effects</Text>
+                <Switch 
+                    trackColor={{false: 'red', true: 'green'}}
+                    thumbColor={isSoundEnabled ? 'blue' : 'orange'}
+                    onValueChange={handleSoundToggle}
+                    value={isSoundEnabled} 
+                />
+            </View>
+            
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
                 <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
@@ -98,6 +109,10 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
     }, 
+    settingsContainer: {
+        //flex: 1,
+        padding: 10,
+    },
     label: {
         fontSize: 14,
         fontWeight: 'bold',
