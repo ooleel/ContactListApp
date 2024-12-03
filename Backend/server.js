@@ -7,7 +7,7 @@ const PORT = 3000;
 //🚩 add contacts!!!!!
 let contacts = [
         {
-            id: '1', 
+            id: 1, 
             name: 'John Smith', 
             phone: '02 9988 2211',
             department: 'Information Communications Technology',
@@ -18,7 +18,7 @@ let contacts = [
             country: 'Australia'
         },
         {
-            id: '2', 
+            id: 2, 
             name: 'Sue White', 
             phone: '03 8899 2255',
             department: 'Finance',
@@ -55,7 +55,7 @@ app.post('/contacts', (req, res) => {
     }
 
     const newContact = {
-        id: (contacts.length > 0 ? parseInt(contacts[contacts.length - 1].id, 10) + 1 : 1).ToString, //new id
+        id: (contacts.length > 0 ? parseInt(contacts[contacts.length - 1].id, 10) + 1 : 1), //new id
         name, 
         phone, 
         department: department || '', //default to empty if not provided
@@ -73,7 +73,7 @@ app.post('/contacts', (req, res) => {
 
 //edit existing contact
 app.post('/contacts/:id', (req, res) => { 
-    const {id} = req.params;
+    const id = parseInt(req.params.id);
     const data = req.body.payload || req.body; //wrapped payload
     const { name, phone, department, street, city, state, zip, country} = data;
 
@@ -81,7 +81,7 @@ app.post('/contacts/:id', (req, res) => {
     if (!name || !phone) {
         return res.status(400).json({error: 'Name and phone are required.'});
     }
-
+    console.log(id);
     const contactIndex = contacts.findIndex((c) => c.id === id);
 
     if (contactIndex === -1) {
@@ -89,7 +89,7 @@ app.post('/contacts/:id', (req, res) => {
     }
 
     //update contact
-    contact[contactIndex] = {
+    contacts[contactIndex] = {
         ...contacts[contactIndex],
         name, 
         phone, 

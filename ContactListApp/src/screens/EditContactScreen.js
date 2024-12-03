@@ -14,11 +14,11 @@ export default function EditContactScreen({route, navigation}) {
 
     const handleEditContact = async() => {
         try {
-            const response = await fetch(`http://localhost:3000/${contact.id}`, {
+            const response = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    name, phone, department, street, city, state, zip, country,
+                    id: contact.id, name, phone, department, street, city, state, zip, country,
                 }),
             });
 

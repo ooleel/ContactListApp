@@ -1,9 +1,31 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function ContactDetailsScreen({route, navigation}) {
     const {contact} = route.params;
     console.log(navigation);
+
+    //modify here
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchContact = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3000/contacts/${contact.id}`); //http://10.0.2.2:3000/contacts
+                    if (response.ok) {
+                        const updatedContact = await response.json();
+                        console.log('Fetched updated contact:', updatedContact);
+                        setContacts(updatedContact) //update fetched contact in state
+                    } else {
+                        console.error('Failed to ftech contact:', response.status)
+                    }
+                } catch (error) {
+                    console.error('Error fetching contact:', error); //log errors for debugging
+                }
+            };
+            fetchContact();
+        }, [contact.id]) //dependency: only when id changes
+    );
 
     return (
         <View style={styles.container}>

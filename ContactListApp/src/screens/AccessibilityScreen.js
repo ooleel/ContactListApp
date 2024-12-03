@@ -5,42 +5,14 @@ import {View, Switch, StyleSheet, TouchableOpacity, Text} from 'react-native';
 //settings
 import * as Brightness from 'expo-brightness'; //done: npx expo install expo-brightness
 import {Audio} from 'expo-av'; //done: npx expo install expo-av
-import AsyncStorage from '@react-native-async-storage/async-storage'; //done: npx expo install @react-native-async-storage/async-storage 
 
-export default function AccessibilityScreen({navigation}) {
-    const [brightness, setBrightness] = useState(1);
-    const [fontSize, setFontSize] = useState(14);
-    const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+export default function AccessibilityScreen({fontSize, setFontSize,accessibilitySettings, setAccessibilitySettings, navigation}) {
     const [sound, setSound] = useState();
-
-    useEffect(() => {
-        const loadSettings = async () => {
-            try {
-                const savedSettings = await AsyncStorage.getItem('accessibilitySettings');
-                if (savedSettings) {
-                    const {brightness, fontSize, isSoundEnabled} = JSON.parse(savedSettings);
-                    setBrightness(brightness);
-                    setFontSize(fontSize);
-                    setIsSoundEnabled(isSoundEnabled);
-                    console.log('Loaded settings:', {brightness, fontSize, isSoundEnabled});
-                }
-            } catch (error) {
-                console.error('Failed to load settings:', error);
-            }
-        };
-
-        loadSettings();
-
-        return sound
-            ? () => {
-                sound.unloadAsync(); 
-            }
-            : undefined;
-    }, [sound]);
 
     const handleBrightnessChange = async (value) => {
         try {
-            setBrightness(value);
+            const updatedSettings = {...accessibilitySettings, brightness: value};
+            setAccessibilitySettings(updatedSettings); //updates global state
             await Brightness.setBrightnessAsync(value);
         } catch (error) {
             console.error('Error setting brightness:', error);
@@ -49,11 +21,12 @@ export default function AccessibilityScreen({navigation}) {
 
     const handleSoundToggle = async (value) => {
         try {
-            setIsSoundEnabled(value);
+            const updatedSettings = {...accessibilitySettings, isSoundEnabled: value};
+            setAccessibilitySettings(updatedSettings); //updates global state
             if (value) {
                 const {sound} = await Audio.Sound.createAsync(require('../../assets/click.mp3'));
                 setSound(sound);
-                await sound.playAsync();
+                await sound.unloadAsync(); //cleanup
             }
         } catch (error) {
             console.error('Error playing sound:', error);
@@ -61,29 +34,29 @@ export default function AccessibilityScreen({navigation}) {
     };
     
     const handleSave = async () => {
-        try {
-            console.log('Saving settings...');
-            await AsyncStorage.setItem(
-                'accessibilitySettings',
-                JSON.stringify({brightness, fontSize, isSoundEnabled})
-            );
-            console.log("Settings saved!");
-            navigation.goBack();
-        } catch (error) {
-            console.error('Failed to save settings:', error);
-        }
+        navigation.goBack(); //back to previous screen (ContactsList)
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.settingsContainer}>
                 <Text style={styles.label}>Brightness</Text>
-                <Slider minimumValue={0.1} maximumValue={1} value={brightness} onSlidingComplete={handleBrightnessChange}/>
+                <Slider 
+                    minimumValue={0.1} 
+                    maximumValue={1} 
+                    value={accessibilitySettings.brightness}   
+                    onSlidingComplete={handleBrightnessChange}
+                />
             </View>
             
             <View style={styles.settingsContainer}>
                 <Text style={styles.label}>Font size</Text>
-                <Slider minimumValue={10} maximumValue={24} value={fontSize} onSlidingComplete={setFontSize}/>
+                <Slider 
+                    minimumValue={10} 
+                    maximumValue={24} 
+                    value={fontSize} 
+                    onSlidingComplete={setFontSize}
+                />
                 <Text style={{fontSize: fontSize}}>Preview font size...</Text>
             </View>
             
@@ -91,9 +64,9 @@ export default function AccessibilityScreen({navigation}) {
                 <Text style={styles.label}>Sound effects</Text>
                 <Switch 
                     trackColor={{false: 'red', true: 'green'}}
-                    thumbColor={isSoundEnabled ? 'blue' : 'orange'}
+                    thumbColor={accessibilitySettings.isSoundEnabled ? 'blue' : 'orange'}
                     onValueChange={handleSoundToggle}
-                    value={isSoundEnabled} 
+                    value={accessibilitySettings.isSoundEnabled} 
                 />
             </View>
             

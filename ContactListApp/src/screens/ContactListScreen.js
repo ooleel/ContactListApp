@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function ContactListScreen({navigation}) {
     const [contacts, setContacts] = useState([]);
@@ -17,10 +18,10 @@ export default function ContactListScreen({navigation}) {
         })
     }, [navigation])
 
-    useEffect(() => {
+    useFocusEffect(() => {
         const fetchContacts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/contacts'); //http://10.0.2.2:3000/contacts
+                const response = await fetch('http://127.0.0.1:3000/contacts'); //http://localhost:3000/contacts or http://10.0.2.2:3000/contacts (android emulator) or http://127.0.0.1:3000/contacts
                 const data = await response.json();
                 console.log('Fetched contacts:', data);
                 setContacts(data) //store fetched contacts in state
@@ -30,7 +31,7 @@ export default function ContactListScreen({navigation}) {
         };
 
         fetchContacts();
-    }, []);
+    });
 
     return (
         <View style={styles.container}>
