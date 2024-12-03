@@ -1,17 +1,19 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, useWindowDimensions} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function ContactDetailsScreen({route, navigation}) {
     const {contact} = route.params;
     console.log(navigation);
+    const {width, height} = useWindowDimensions();
+    const isLandscape = width > height;
 
     //modify here
     useFocusEffect(
         React.useCallback(() => {
             const fetchContact = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/contacts/${contact.id}`); //http://10.0.2.2:3000/contacts
+                    const response = await fetch(`http://localhost:3000/contacts/${contact.id}`); 
                     if (response.ok) {
                         const updatedContact = await response.json();
                         console.log('Fetched updated contact:', updatedContact);
@@ -28,7 +30,7 @@ export default function ContactDetailsScreen({route, navigation}) {
     );
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, isLandscape && styles.landscapeContainer]}>
             <Text style={styles.label}>Name:</Text>
             <Text style={styles.value}>{contact.name}</Text>
 
@@ -57,6 +59,10 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         backgroundColor: '#fff',
+    },
+    landscapeContainer: {
+        justifyContent: 'space-between',
+        paddingHorizontal: 30,
     },
     label: {
         fontSize: 12,
