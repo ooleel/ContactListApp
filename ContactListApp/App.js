@@ -35,7 +35,7 @@ export default function App() {
           )}
         </Stack.Screen>
 
-        <Stack.Screen name="ContactDetails">
+        <Stack.Screen name="ContactDetails" options={{title: 'Contact details'}}>
           {(props) => (
             <ContactDetailsScreen
               {...props}

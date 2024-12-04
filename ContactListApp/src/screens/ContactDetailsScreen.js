@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
     landscapeContainer: {
         justifyContent: 'space-between',
-        paddingHorizontal: 30,
+        paddingHorizontal: 10,
     },
     label: {
         marginTop: 8,
