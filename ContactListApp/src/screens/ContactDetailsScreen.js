@@ -13,7 +13,7 @@ export default function ContactDetailsScreen({route, accessibilityStyle, navigat
         React.useCallback(() => {
             const fetchContact = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/contacts/${contact.id}`); 
+                    const response = await fetch(`http://10.0.2.2:3000/contacts/${contact.id}`); 
                     if (response.ok) {
                         const updatedContact = await response.json();
                         console.log('Fetched updated contact:', updatedContact);

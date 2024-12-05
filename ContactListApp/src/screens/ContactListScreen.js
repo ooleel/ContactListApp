@@ -24,7 +24,7 @@ export default function ContactListScreen({accessibilityStyle, navigation}) {
         React.useCallback(() => {
         const fetchContacts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/contacts'); //http://localhost:3000/contacts or http://10.0.2.2:3000/contacts (android emulator) 
+                const response = await fetch('http://10.0.2.2:3000/contacts'); 
                 const data = await response.json();
                 console.log('Fetched contacts:', data);
                 setContacts(data) //store fetched contacts in state
